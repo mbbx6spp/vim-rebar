@@ -1,0 +1,30 @@
+*bundler.txt*  A wrapper for Bundler vim plugin
+
+Author:  Susan Potter <meNOSPAM@susanpotter.net>         *bundler-author*
+License: Charityware (see |license|)
+
+This plugin is only available if 'compatible' is not set and Vim version 7.00 
+or above. Tested by |bundler-author| in Vim version 7.2 and Vim version 7.3.
+
+INTRODUCTION                                    *bundler*
+
+Install in ~/.vim, or in ~\vimfiles if you're on Windows.
+
+COMMANDS                                        *bundler-commands*
+
+These commands are local to the buffers in which they work (generally, buffers
+that are part of Git repositories).
+
+                                                *bundler-:Bundle*
+:Bundle [args]          Run an arbitrary bundler command. Similar to 
+                        :!bundle [args] but chdir to the project tree first.
+
+MAPPINGS                                        *bundler-mappings*
+
+ABOUT                                           *bundler-about*
+
+Grab the latest version or report a bug on GitHub:
+
+http://github.com/mbbx6spp/vim-bundler
+
+ vim:tw=78:et:ft=help:norl:

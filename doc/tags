@@ -1,0 +1,7 @@
+bundler	rebar.txt	/*bundler*
+bundler-:Bundle	rebar.txt	/*bundler-:Bundle*
+bundler-about	rebar.txt	/*bundler-about*
+bundler-author	rebar.txt	/*bundler-author*
+bundler-commands	rebar.txt	/*bundler-commands*
+bundler-mappings	rebar.txt	/*bundler-mappings*
+bundler.txt	rebar.txt	/*bundler.txt*
