@@ -23,6 +23,39 @@ endfunction
 " Execute the rebar command
 function rebar#Execute(subCmd)
   let subCmd = a:subCmd
+
+  " Test if the command name has an exact match.
+  if index(g:rebarSubcommands, subCmd) == -1
+    if g:rebarAutocomplete == 1
+      let found = 0
+      " Complete by prefix (`c' -> `clean', `com' -> `compile', etc.) if
+      " the sub-command is not in the list of sub-commands.
+      for cmd in g:rebarSubcommands
+        if match(cmd, '^' . subCmd) != -1
+          let subCmd = cmd
+          let found = 1
+          break
+        endif
+      endfo
+
+      " Exit if there is no matching sub-command.
+      if !found
+        echohl error
+        echon "Rebar subcommand `" subCmd "' not found, add it to
+              \ g:rebarSubcommands if you are sure it exists."
+        echohl normal
+        return
+      endif
+    else
+      echohl error
+      echon "Rebar subcommand `" subCmd "' not found, add it to
+            \ g:rebarSubcommands if you are sure it exists of set
+            \ g:rebarAutocomplete to enable autocompletion."
+      echohl normal
+      return
+    endif
+  end
+
   let makeprgOriginal = &l:makeprg
   let errorformatOriginal = &l:errorformat
   try
@@ -52,7 +85,7 @@ function rebar#ConvertErrorMessages()
   endif
 endfunction
 
-" Auto-complete all available subcommands for rebar 
+" Auto-complete all available subcommands for rebar
 function rebar#AutoCompleteSubcommands(ArgLead, CmdLine, CursorPos)
   let matches = copy(g:rebarSubcommands)
   let condition = 'v:val =~ "^' . a:ArgLead . '"'
@@ -71,6 +104,7 @@ function rebar#SetupSubcommands()
     call map(lines, 'matchstr(v:val, "[a-zA-Z0-9-]*")')
     call filter(lines, 'v:val != ""')
     let g:rebarSubcommands = lines
+    let g:rebarAutocomplete = 0
   endif
 endfunction
 
